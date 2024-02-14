@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mobile Design</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; /* Changed height to min-height */
+            background-color: white;
+        }
+        .container {
+            text-align: center;
+            position: relative;
+        }
+        .gif {
+            width: 50%; /* Reduced size to fit smaller view */
+            height: auto;
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translate(-40%, -50%); /* Center the image */
+            z-index: 1;
+        }
+        .gift-box1 {
+            width: 100%; /* Reduced size to fit smaller view */
+            height: auto;
+            position: relative;
+            z-index: 0;
+            transform: rotate(24.5deg);
+            cursor: pointer; /* Add cursor pointer */
+        }
+        .envelop-open {
+            display: none; /* Hide the envelop-open by default */
+            width: 100%;
+            height: auto;
+            position: relative;
+            z-index: 0;
+            cursor: pointer;
+        }
+        .harry-potter-button {
+            display: none; /* Hide the button by default */
+            background-color: #7f0000; /* Dark red background */
+            color: #fff; /* White text color */
+            padding: 10px 20px; /* Padding for the button */
+            font-size: 16px; /* Font size */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Cursor style */
+            transition: background-color 0.3s; /* Smooth transition for background color */
+            text-transform: uppercase; /* Uppercase text */
+            font-weight: bold; /* Bold text */
+            font-family: 'Arial', sans-serif; /* Font family */
+            position: relative;
+            top: -150px;
+            left: 35.5%;
+        }
+        .countdown {
+            font-size: 13px; /* Font size */
+            font-family: 'Arial', sans-serif; /* Font family */
+            top: -100px; /* Add space between button and countdown */ 
+			position: relative;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <img class="gif" src="https://img.genial.ly/6071b21a58859272475de92a/6d70810c-e908-4f6f-8333-b0a11ab62851.gif" alt="Harry Potter GIF">
+    <img class="gift-box1" id="giftImage1" src="https://i.ebayimg.com/images/g/XogAAOSwX-piDECD/s-l1200.webp" alt="Gift Box">
+    <img class="envelop-open" id="giftImage2" src="msg.png" alt="Gift Box">
+    <button class="harry-potter-button" onclick="startCountdown(20)">Click Me</button>
+    <div class="countdown"></div>
+</div>
+
+<script>
+    // Get references to the gift box images, the button, and the countdown element
+    const giftImage1 = document.getElementById("giftImage1");
+    const giftImage2 = document.getElementById("giftImage2");
+    const harryPotterButton = document.querySelector(".harry-potter-button");
+    const countdownElement = document.querySelector(".countdown");
+
+    // Add click event listener to the first gift box image
+    giftImage1.addEventListener("click", function() {
+        // Hide the first gift box image
+        giftImage1.style.display = "none";
+        // Show the second gift box image (envelop-open)
+        giftImage2.style.display = "inline";
+        // Show the button
+        harryPotterButton.style.display = "block";
+    });
+
+    // Function to start the countdown
+    function startCountdown(seconds) {
+        let countdown = seconds;
+        countdownElement.textContent = countdown;
+
+        // Update the countdown every second
+        const timerId = setInterval(function() {
+            countdown--;
+            countdownElement.textContent = countdown;
+
+            // Check if the countdown has reached 0
+            if (countdown <= 0) {
+                clearInterval(timerId); // Stop the timer
+                countdownElement.textContent = "You received Php.500.00 from Carlo!";
+            }
+        }, 1000); // Update every 1 second (1000 milliseconds)
+    }
+</script>
+
+</body>
+</html>
